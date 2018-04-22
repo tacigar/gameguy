@@ -14,6 +14,7 @@ class Game
     
   public:
     auto initialize() -> void;
+    auto run() -> void;
     auto terminate() -> void;
 };
 

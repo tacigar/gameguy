@@ -19,6 +19,11 @@ auto Game::initialize() -> void
     SDL_UpdateWindowSurface(m_window);
 }
 
+auto Game::run() -> void
+{
+
+}
+
 auto Game::terminate() -> void
 {
     SDL_DestroyWindow(m_window);

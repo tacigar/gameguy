@@ -5,7 +5,7 @@ auto main(int argc, char **argv) -> int
 {
     gameguy::Game game;
     game.initialize();
-    SDL_Delay(2000);
+    game.run();
     game.terminate();
     return 0;
 }
