@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <cstdint>
 #include "graphics.hpp"
-#include <iostream>
+
 namespace gameguy {
 
 Graphics::Graphics(SDL_Window *window, int width, int height)
