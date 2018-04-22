@@ -14,8 +14,16 @@ auto Game::initialize() -> void
         480,
         SDL_WINDOW_SHOWN
     );
-    m_surface = SDL_GetWindowSurface(m_window);
-    SDL_UpdateWindowSurface(m_window);
+
+    m_renderer = SDL_CreateRenderer(m_window, -1, 0);
+    m_texture = SDL_CreateTexture(
+        m_renderer,
+        SDL_PIXELFORMAT_ARGB8888,
+        SDL_TEXTUREACCESS_STATIC,
+        640,
+        480
+    );
+    m_pixels = new std::int32_t[640 * 480];
 }
 
 auto Game::run() -> void
@@ -57,7 +65,9 @@ auto Game::update(int dt) -> void
 
 auto Game::draw() -> void
 {
-
+    SDL_RenderClear(m_renderer);
+    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+    SDL_RenderPresent(m_renderer);
 }
 
 } // namespace gameguy
