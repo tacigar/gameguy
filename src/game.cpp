@@ -16,6 +16,13 @@ auto Game::initialize() -> void
         SDL_WINDOW_SHOWN
     );
     m_graphics = new Graphics(m_window, 640, 480);
+
+    for (int i = 0; i < m_graphics->getTextureWidth(); ++i) {
+        for (int j = 0; j < m_graphics->getTextureHeight(); ++j) {
+            if (i == j)
+                m_graphics->setPixel(i, j, 0);
+        }
+    }
 }
 
 auto Game::run() -> void
