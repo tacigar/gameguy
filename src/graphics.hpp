@@ -12,18 +12,22 @@ namespace gameguy {
 class Graphics
 {
   public:
-    Graphics(SDL_Window *window);
+    Graphics(SDL_Window *window, int width, int height);
     ~Graphics();
     
     auto draw() -> void;
     auto setPixel(int x, int y, std::int32_t v) -> void;
     auto getPixel(int x, int y) -> std::int32_t;
+    auto getTextureWidth() -> int;
+    auto getTextureHeight() -> int;
     
   private:
     SDL_Window *m_window;
     SDL_Renderer *m_renderer;
     SDL_Texture *m_texture;
     std::int32_t *m_pixels;
+    int m_width;
+    int m_height;
 };
 
 } // namespace gameguy

@@ -15,7 +15,7 @@ auto Game::initialize() -> void
         480,
         SDL_WINDOW_SHOWN
     );
-    m_graphics = new Graphics(m_window);
+    m_graphics = new Graphics(m_window, 640, 480);
 }
 
 auto Game::run() -> void
