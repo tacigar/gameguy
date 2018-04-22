@@ -44,4 +44,14 @@ auto Graphics::getPixel(int x, int y) -> std::int32_t
     return m_pixels[y * m_textureWidth + x];
 }
 
+auto Graphics::getTextureWidth() -> int
+{
+    return m_textureWidth;
+}
+
+auto Graphics::getTextureHeight() -> int
+{
+    return m_textureHeight;
+}
+
 } // namespace gameguy
