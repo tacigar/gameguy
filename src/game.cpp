@@ -1,8 +1,7 @@
 #include <SDL2/SDL.h>
 #include "game.hpp"
-
+#include "graphics.hpp"
 #include <iostream>
-
 namespace gameguy {
 
 auto Game::initialize() -> void
@@ -16,17 +15,7 @@ auto Game::initialize() -> void
         480,
         SDL_WINDOW_SHOWN
     );
-
-    m_renderer = SDL_CreateRenderer(m_window, -1, 0);
-    m_texture = SDL_CreateTexture(
-        m_renderer,
-        SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STATIC,
-        640,
-        480
-    );
-    m_pixels = new std::int32_t[640 * 480];
-    memset(m_pixels, 255, 640 * 480 * sizeof(std::int32_t));
+    m_graphics = new Graphics(m_window);
 }
 
 auto Game::run() -> void
@@ -57,7 +46,7 @@ auto Game::run() -> void
                     if (leftMouseButtonDown) {
                         int mouseX = event.motion.x;
                         int mouseY = event.motion.y;
-                        m_pixels[mouseY * 640 + mouseX] = 0;
+                        m_graphics->setPixel(mouseX, mouseY, 0);
                     }
                     break;
             }
@@ -76,6 +65,7 @@ auto Game::run() -> void
 
 auto Game::terminate() -> void
 {
+    delete m_graphics;
     SDL_DestroyWindow(m_window);
     SDL_Quit();
 }
@@ -87,10 +77,7 @@ auto Game::update(int dt) -> void
 
 auto Game::draw() -> void
 {
-    SDL_UpdateTexture(m_texture, NULL, m_pixels, 640 * sizeof(std::int32_t));    
-    SDL_RenderClear(m_renderer);
-    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
-    SDL_RenderPresent(m_renderer);
+    m_graphics->draw();
 }
 
 } // namespace gameguy

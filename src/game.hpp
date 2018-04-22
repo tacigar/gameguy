@@ -8,6 +8,8 @@ class SDL_Surface;
 
 namespace gameguy {
 
+class Graphics;
+
 class Game
 {
   public:
@@ -21,9 +23,7 @@ class Game
 
   private:
     SDL_Window *m_window;
-    SDL_Renderer *m_renderer;
-    SDL_Texture *m_texture;
-    std::int32_t *m_pixels;
+    Graphics *m_graphics;
 };
 
 } // namespace gameguy
