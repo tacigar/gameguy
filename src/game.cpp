@@ -18,16 +18,6 @@ auto Game::initialize() -> void
     SDL_UpdateWindowSurface(m_window);
 }
 
-auto Game::update(int dt) -> void
-{
-
-}
-
-auto Game::draw() -> void
-{
-
-}
-
 auto Game::run() -> void
 {
     SDL_Event event;
@@ -58,6 +48,16 @@ auto Game::terminate() -> void
 {
     SDL_DestroyWindow(m_window);
     SDL_Quit();
+}
+
+auto Game::update(int dt) -> void
+{
+
+}
+
+auto Game::draw() -> void
+{
+
 }
 
 } // namespace gameguy

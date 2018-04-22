@@ -8,10 +8,6 @@ namespace gameguy {
 
 class Game
 {
-  private:
-    SDL_Window *m_window;
-    SDL_Surface *m_surface;
-
   public:
     auto initialize() -> void;
     auto run() -> void;
@@ -20,6 +16,10 @@ class Game
   private:
     auto update(int dt) -> void;
     auto draw() -> void;
+
+  private:
+    SDL_Window *m_window;
+    SDL_Surface *m_surface;    
 };
 
 } // namespace gameguy
