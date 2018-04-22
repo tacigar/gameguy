@@ -26,8 +26,8 @@ class Graphics
     SDL_Renderer *m_renderer;
     SDL_Texture *m_texture;
     std::int32_t *m_pixels;
-    int m_width;
-    int m_height;
+    int m_textureWidth;
+    int m_textureHeight;
 };
 
 } // namespace gameguy
