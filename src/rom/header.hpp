@@ -55,8 +55,9 @@ class Header
     }
 
   private:
-    auto extractStringData(std::vector<gameguy::Byte> rawData, int from, int to) -> std::string;
+    static auto extractStringData(std::vector<gameguy::Byte> rawData, int from, int to) -> std::string;
 
+  private:
     std::size_t m_romSize;
     std::size_t m_ramSize;
     std::string m_title;
