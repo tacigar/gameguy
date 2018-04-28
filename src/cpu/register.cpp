@@ -36,6 +36,24 @@ GEN_COMPOUND_REGISTER_ACCESSOR(H, L);
 
 #undef GEN_COMPOUND_REGISTER_ACCESSOR
 
+#define GEN_FLAG_REGISTER_ACCESSOR(name, bits) \
+    auto Register::flag##name() const -> bool \
+    { return (bits & m_regF) != 0x00; } \
+    auto Register::flag##name(bool value) -> void \
+    { \
+      if (value == true) { \
+        m_regF = (gameguy::Byte)(m_regF | bits); \
+      } else { \
+        m_regF = (gameguy::Byte)(m_regF & ~bits); \
+      } \
+    }
+
+GEN_FLAG_REGISTER_ACCESSOR(Z, 0b10000000);
+GEN_FLAG_REGISTER_ACCESSOR(N, 0b01000000);
+GEN_FLAG_REGISTER_ACCESSOR(H, 0b00100000);
+GEN_FLAG_REGISTER_ACCESSOR(C, 0b00010000);
+
+#undef GEN_FLAG_REGISTER_ACCESSOR
 
 } // namespace cpu
 

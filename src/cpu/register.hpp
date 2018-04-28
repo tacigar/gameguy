@@ -39,6 +39,18 @@ class Register
 
     auto regHL() const -> gameguy::Word;
     auto regHL(gameguy::Word value) -> void;
+
+    auto flagZ() const -> bool;
+    auto flagZ(bool value) -> void;
+
+    auto flagN() const -> bool;
+    auto flagN(bool value) -> void;
+
+    auto flagH() const -> bool;
+    auto flagH(bool value) -> void;
+
+    auto flagC() const -> bool;
+    auto flagC(bool value) -> void;
     
   private:
     gameguy::Byte m_regA;
