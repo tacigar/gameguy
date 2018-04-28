@@ -27,6 +27,18 @@ class Register
     GEN_REGISTER_ACCESSOR(gameguy::Byte, L);
     GEN_REGISTER_ACCESSOR(gameguy::Word, PC);
     GEN_REGISTER_ACCESSOR(gameguy::Word, SP);    
+
+    auto regAF() const -> gameguy::Word;
+    auto regAF(gameguy::Word value) -> void;
+
+    auto regBC() const -> gameguy::Word;
+    auto regBC(gameguy::Word value) -> void;
+
+    auto regDE() const -> gameguy::Word;
+    auto regDE(gameguy::Word value) -> void;
+
+    auto regHL() const -> gameguy::Word;
+    auto regHL(gameguy::Word value) -> void;
     
   private:
     gameguy::Byte m_regA;
