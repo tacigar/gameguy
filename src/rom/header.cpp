@@ -1,6 +1,11 @@
+#include "../config/type.hpp"
+#include "cartridge_type.hpp"
 #include "header.hpp"
 
 #include <cmath>
+#include <cstddef>
+#include <string>
+#include <vector>
 
 namespace gameguy {
 

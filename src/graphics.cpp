@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
+
 #include <cstdint>
+
 #include "graphics.hpp"
 
 namespace gameguy {

@@ -1,7 +1,8 @@
 #include <SDL2/SDL.h>
+
 #include "game.hpp"
 #include "graphics.hpp"
-#include <iostream>
+
 namespace gameguy {
 
 auto Game::initialize() -> void

@@ -1,6 +1,7 @@
+#include "../config/type.hpp"
 #include "register.hpp"
 
-#include "../config/type.hpp"
+#include <cstdint>
 
 namespace gameguy {
 
