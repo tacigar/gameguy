@@ -53,8 +53,10 @@ class Header
     {
         return m_cartridgeType;
     }
-    
+
   private:
+    auto extractStringData(std::vector<gameguy::Byte> rawData, int from, int to) -> std::string;
+
     std::size_t m_romSize;
     std::size_t m_ramSize;
     std::string m_title;
