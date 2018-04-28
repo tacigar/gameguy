@@ -1,6 +1,6 @@
-#include "cpu/register.hpp"
+#include "register.hpp"
 
-#include "config/type.hpp"
+#include "../config/type.hpp"
 
 namespace gameguy {
 
