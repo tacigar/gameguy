@@ -1,17 +1,32 @@
 #ifndef GAMEGUY_CPU_REGISTER_HPP
 #define GAMEGUY_CPU_REGISTER_HPP
 
-#include "config/type.hpp"
-#include <cstdint>
+//#include "config/type.hpp"
+//#include <cstdint>
 
 namespace gameguy {
 
 namespace cpu {
 
+#define GEN_REGISTER_ACCESSOR(type, name) \
+    auto reg##name() const -> type { return m_reg##name; } \
+    auto reg##name(type value) -> void { m_reg##name = value; }
+
 class Register
 {
   public:
     Register();
+
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, A);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, B);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, C);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, D);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, E);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, F);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, H);
+    GEN_REGISTER_ACCESSOR(gameguy::Byte, L);
+    GEN_REGISTER_ACCESSOR(gameguy::Word, PC);
+    GEN_REGISTER_ACCESSOR(gameguy::Word, SP);    
     
   private:
     gameguy::Byte m_regA;
@@ -26,6 +41,8 @@ class Register
     gameguy::Word m_regPC;
     gameguy::Word m_regSP;
 };
+
+#undef GEN_REGISTER_ACCESSOR
 
 } // namespace cpu
 
