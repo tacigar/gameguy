@@ -1,7 +1,9 @@
 #ifndef GAMEGUY_CPU_REGISTER_HPP
 #define GAMEGUY_CPU_REGISTER_HPP
 
+#include "config/type.hpp"
 #include <cstdint>
+
 
 namespace gameguy {
 
@@ -10,17 +12,17 @@ namespace cpu {
 class Register
 {
   private:
-    char m_regA;
-    char m_regB;
-    char m_regC;
-    char m_regD;
-    char m_regE;
-    char m_regF;
-    char m_regH;
-    char m_regL;
+    gameguy::Byte m_regA;
+    gameguy::Byte m_regB;
+    gameguy::Byte m_regC;
+    gameguy::Byte m_regD;
+    gameguy::Byte m_regE;
+    gameguy::Byte m_regF;
+    gameguy::Byte m_regH;
+    gameguy::Byte m_regL;    
 
-    std::int_least16_t m_regPC;
-    std::int_least16_t m_regSP;
+    gameguy::Word m_regPC;
+    gameguy::Word m_regSP;
 };
 
 } // namespace cpu
