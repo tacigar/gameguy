@@ -1,5 +1,5 @@
 PROGRAM := bin/GameGuy
-SRCS := $(wildcard src/*.cpp) $(wildcard src/cpu/*.cpp)
+SRCS := $(wildcard src/*.cpp) $(wildcard src/cpu/*.cpp) $(wildcard src/rom/*.cpp)
 OBJS := ${SRCS:.cpp=.o}
 LIBS := -lSDL2
 CXXFLAGS := -std=c++14
