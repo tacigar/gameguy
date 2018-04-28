@@ -1,6 +1,7 @@
 #ifndef GAMEGUY_ROM_HEADER_HPP
 #define GAMEGUY_ROM_HEADER_HPP
 
+#include "cartridge_type.hpp"
 #include <cstddef>
 #include <string>
 
@@ -17,6 +18,7 @@ class Header
     std::string m_manufacturerCode;
     bool m_cgbFlag;
     bool m_sgbFlag;
+    gameguy::rom::CartridgeType m_cartridgeType;
 };
 
 } // namespace rom
