@@ -4,13 +4,15 @@
 #include "config/type.hpp"
 #include <cstdint>
 
-
 namespace gameguy {
 
 namespace cpu {
 
 class Register
 {
+  public:
+    Register();
+    
   private:
     gameguy::Byte m_regA;
     gameguy::Byte m_regB;
