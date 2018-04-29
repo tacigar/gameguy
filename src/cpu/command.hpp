@@ -14,14 +14,15 @@ namespace cpu {
 class Command
 {
   public:
-    Command(gamegoy::cpu::Register register);
+    Command(gameguy::cpu::Register reg);
 
   private:
     auto setupLoadCommands() -> void;
 
   private:
-    gameguy::cpu::register m_register;
-    std::unordered_map<gameguy::Byte, std::function<void()>> m_commands;
+    gameguy::cpu::Register m_register;
+    std::unordered_map<
+        gameguy::Byte, std::function<void(gameguy::cpu::Register &)>> m_commands;
 };
 
 } // namespace cpu
