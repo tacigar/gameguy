@@ -1,10 +1,12 @@
 #include "command.hpp"
 
+#include <memory>
+
 namespace gameguy {
 
 namespace cpu {
 
-Command::Command(gameguy::cpu::Register reg)
+Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg)
         : m_register(reg)
         , m_commands()
 {
