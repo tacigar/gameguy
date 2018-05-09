@@ -19,6 +19,11 @@ class Rom
     static auto load(std::istream& is) -> std::shared_ptr<Rom>;
     static auto loadFile(const std::string& fileName) -> std::shared_ptr<Rom>;
 
+    auto header() -> std::shared_ptr<gameguy::rom::Header>
+    {
+        return m_header;
+    }
+
   private:
     std::shared_ptr<gameguy::rom::Header> m_header;
 };

@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstddef>
 #include <memory>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -63,6 +64,15 @@ auto Header::extractStringData(std::vector<gameguy::Byte> rawData, int from, int
         }
     }
     return std::string(rawData.begin() + from, rawData.begin() + to);
+}
+
+auto operator<<(std::ostream& os, const Header& header) -> std::ostream&
+{
+    os << " ROM SIZE: " << header.romSize() << std::endl;
+    os << " RAM SIZE: " << header.ramSize() << std::endl;
+    os << " TITLE: " << header.title() << std::endl;
+    os << " MANUFACTURER CODE: " << header.manufacturerCode();
+    return os;
 }
 
 } // namespace rom
