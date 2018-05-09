@@ -7,7 +7,12 @@ namespace cpu {
 
 class Cpu
 {
+  public:
+    Cpu();
 
+  private:
+    gameguy::cpu::Register m_register;
+    gameguy::cpu::Command m_command;
 };
 
 } // namespace cpu
