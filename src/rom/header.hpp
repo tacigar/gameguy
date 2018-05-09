@@ -3,7 +3,10 @@
 
 #include "../config/type.hpp"
 #include "cartridge_type.hpp"
+
 #include <cstddef>
+#include <memory>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -17,7 +20,7 @@ class Header
     Header() = default;
     ~Header() = default;
 
-    static auto parseData(std::vector<gameguy::Byte> rawData) -> Header;
+    static auto parseData(std::vector<gameguy::Byte> rawData) -> std::shared_ptr<Header>;
 
     auto romSize() const -> std::size_t
     {
@@ -57,6 +60,8 @@ class Header
   private:
     static auto extractStringData(std::vector<gameguy::Byte> rawData, int from, int to) -> std::string;
 
+    friend auto operator<<(std::ostream& os, const Header& header) -> std::ostream&;
+    
   private:
     std::size_t m_romSize;
     std::size_t m_ramSize;
