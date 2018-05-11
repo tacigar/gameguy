@@ -14,6 +14,9 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
         , m_memory(memory)
         , m_commands()
 {
+    setupLoadCommands();
+    setupJumpCommands();
+    setupRotateShiftCommands();
 }
 
 auto Command::execute(gameguy::Byte opcode) -> void
@@ -86,8 +89,15 @@ auto Command::setupLoadCommands() -> void
 
 auto Command::setupJumpCommands() -> void
 {
-    m_commands[0x3C] = [this]() -> void {
+    m_commands[0xC3] = [this]() -> void {
         m_register->regPC(m_memory->readWord(m_register->regPC()));
+    };
+}
+
+auto Command::setupRotateShiftCommands() -> void
+{
+    m_commands[0x00] = [this]() -> void {
+
     };
 }
 

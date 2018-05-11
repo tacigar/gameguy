@@ -29,6 +29,7 @@ class Command
   private:
     auto setupLoadCommands() -> void;
     auto setupJumpCommands() -> void;
+    auto setupRotateShiftCommands() -> void;
 
   private:
     std::shared_ptr<gameguy::cpu::Register> m_register;
