@@ -71,7 +71,8 @@ auto operator<<(std::ostream& os, const Header& header) -> std::ostream&
     os << " ROM SIZE: " << header.romSize() << std::endl;
     os << " RAM SIZE: " << header.ramSize() << std::endl;
     os << " TITLE: " << header.title() << std::endl;
-    os << " MANUFACTURER CODE: " << header.manufacturerCode();
+    os << " MANUFACTURER CODE: " << header.manufacturerCode() << std::endl;
+    os << " CARTRIDGE TYPE: " << cartridgeTypeToString(header.cartridgeType());
     return os;
 }
 
