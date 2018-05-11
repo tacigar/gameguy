@@ -1,4 +1,4 @@
-#include "../config/type.hpp"
+#include "../config/config.hpp"
 #include "header.hpp"
 #include "rom.hpp"
 

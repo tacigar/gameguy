@@ -1,6 +1,5 @@
 #include <SDL2/SDL.h>
 #include "game.hpp"
-#include "config/type.hpp"
 #include "config/config.hpp"
 #include "rom/header.hpp"
 #include "rom/rom.hpp"

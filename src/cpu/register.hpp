@@ -1,7 +1,7 @@
 #ifndef GAMEGUY_CPU_REGISTER_HPP
 #define GAMEGUY_CPU_REGISTER_HPP
 
-#include "../config/type.hpp"
+#include "../config/config.hpp"
 #include <cstdint>
 
 namespace gameguy {

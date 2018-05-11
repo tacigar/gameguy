@@ -1,4 +1,4 @@
-#include "../config/type.hpp"
+#include "../config/config.hpp"
 #include "cartridge_type.hpp"
 #include "header.hpp"
 
