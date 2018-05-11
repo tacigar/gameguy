@@ -9,6 +9,7 @@ namespace gameguy {
 namespace memory {
 
 class Mbc;
+class Memory;
 
 }
 
@@ -28,7 +29,8 @@ class Cpu
     std::vector<gameguy::Byte> m_rawData;
     std::shared_ptr<gameguy::cpu::Register> m_register;
     std::shared_ptr<gameguy::cpu::Command> m_command;    
-    std::shared_ptr<gameguy::memory::Mbc> m_mbc;    
+    std::shared_ptr<gameguy::memory::Mbc> m_mbc;
+    std::shared_ptr<gameguy::memory::Memory> m_memory;
 };
 
 } // namespace cpu
