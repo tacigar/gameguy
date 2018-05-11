@@ -4,6 +4,19 @@ namespace gameguy {
 
 namespace memory {
 
+Mbc3::Mbc3(const std::vector<gameguy::Byte>& rawData)
+        : m_rawData(rawData)
+        , m_ram()
+        , m_rtc()
+        , m_romBank(0)
+        , m_ramBank(0)
+        , m_rtcSelect(0x08)
+        , m_rtcEnable(false)
+        , m_ramEnable(false)
+{
+
+}
+
 auto Mbc3::readByte(gameguy::Word address) -> gameguy::Byte
 {
     if (address <= 0x3FFF) {
