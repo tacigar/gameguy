@@ -1,3 +1,4 @@
+#include "../memory/memory.hpp"
 #include "command.hpp"
 
 #include <memory>
@@ -6,8 +7,10 @@ namespace gameguy {
 
 namespace cpu {
 
-Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg)
+Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
+                 const std::shared_ptr<gameguy::memory::Memory> memory)
         : m_register(reg)
+        , m_memory(memory)
         , m_commands()
 {
 }
@@ -77,6 +80,7 @@ auto Command::setupLoadCommands() -> void
 
 auto setupJumpCommands() -> void
 {
+    
 }
 
 } // namespace cpu

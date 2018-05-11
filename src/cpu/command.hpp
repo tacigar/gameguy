@@ -2,6 +2,7 @@
 #define GAMEGUY_CPU_COMMAND_HPP
 
 #include "../config/config.hpp"
+#include "../memory/memory.hpp"
 #include "register.hpp"
 
 #include <functional>
@@ -10,12 +11,19 @@
 
 namespace gameguy {
 
+namespace memory {
+
+class Memory;
+
+} // namespace memory
+
 namespace cpu {
 
 class Command
 {
   public:
-    Command(std::shared_ptr<gameguy::cpu::Register> reg);
+    Command(const std::shared_ptr<gameguy::cpu::Register> reg,
+            const std::shared_ptr<gameguy::memory::Memory> memory);
 
   private:
     auto setupLoadCommands() -> void;
@@ -23,6 +31,7 @@ class Command
 
   private:
     std::shared_ptr<gameguy::cpu::Register> m_register;
+    std::shared_ptr<gameguy::memory::Memory> m_memory;
     std::unordered_map<
         gameguy::Byte, std::function<void()>> m_commands;
 };
