@@ -24,6 +24,7 @@ class Command
   public:
     Command(const std::shared_ptr<gameguy::cpu::Register> reg,
             const std::shared_ptr<gameguy::memory::Memory> memory);
+    auto execute(gameguy::Byte opcode) -> void;
 
   private:
     auto setupLoadCommands() -> void;

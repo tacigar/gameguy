@@ -1,3 +1,4 @@
+#include "../config/config.hpp"
 #include "../memory/memory.hpp"
 #include "command.hpp"
 
@@ -13,6 +14,11 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
         , m_memory(memory)
         , m_commands()
 {
+}
+
+auto Command::execute(gameguy::Byte opcode) -> void
+{
+    m_commands[opcode]();
 }
 
 auto Command::setupLoadCommands() -> void
