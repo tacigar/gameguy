@@ -30,7 +30,7 @@ auto Game::run() -> void
 {
     SDL_Event event;
     int lastFrame = SDL_GetTicks();
-    int wait = 16;
+    unsigned int wait = 16;
 
     bool leftMouseButtonDown = false;
 
@@ -62,7 +62,7 @@ auto Game::run() -> void
         update(SDL_GetTicks() - lastFrame);
         if (SDL_GetTicks() - lastFrame < wait) {
             draw();
-            int tick = SDL_GetTicks();
+            unsigned int tick = SDL_GetTicks();
             if (tick - lastFrame < wait) {
                 SDL_Delay(wait - (tick - (lastFrame)));
             }

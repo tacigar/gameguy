@@ -63,7 +63,7 @@ auto Header::extractStringData(std::vector<gameguy::Byte> rawData, int from, int
             break;
         }
     }
-    return std::string(rawData.begin() + from, rawData.begin() + to);
+    return std::string(rawData.begin() + from, rawData.begin() + lastIndex);
 }
 
 auto operator<<(std::ostream& os, const Header& header) -> std::ostream&
