@@ -1,7 +1,7 @@
 #ifndef GAMEGUY_ROM_HEADER_HPP
 #define GAMEGUY_ROM_HEADER_HPP
 
-#include "../config/type.hpp"
+#include "../config/config.hpp"
 #include "cartridge_type.hpp"
 
 #include <cstddef>

@@ -1,7 +1,7 @@
 #ifndef GAMEGUY_CPU_COMMAND_HPP
 #define GAMEGUY_CPU_COMMAND_HPP
 
-#include "../config/type.hpp"
+#include "../config/config.hpp"
 #include "register.hpp"
 
 #include <functional>
