@@ -28,9 +28,9 @@ class Cpu
   private:
     std::vector<gameguy::Byte> m_rawData;
     std::shared_ptr<gameguy::cpu::Register> m_register;
-    std::shared_ptr<gameguy::cpu::Command> m_command;    
-    std::shared_ptr<gameguy::memory::Mbc> m_mbc;
     std::shared_ptr<gameguy::memory::Memory> m_memory;
+    std::shared_ptr<gameguy::cpu::Command> m_command;
+    std::shared_ptr<gameguy::memory::Mbc> m_mbc;
 };
 
 } // namespace cpu

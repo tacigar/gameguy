@@ -23,6 +23,9 @@ class Memory
     {
         m_rawData[address] = b;
     }
+
+    auto readWord(gameguy::Word address) -> gameguy::Word;
+    auto writeWord(gameguy::Word address, gameguy::Word w) -> void;
     
   private:
     std::vector<gameguy::Byte> m_rawData;

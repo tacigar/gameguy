@@ -1,3 +1,5 @@
+#include "../config/config.hpp"
+#include "../memory/memory.hpp"
 #include "command.hpp"
 
 #include <memory>
@@ -6,19 +8,29 @@ namespace gameguy {
 
 namespace cpu {
 
-Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg)
+Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
+                 const std::shared_ptr<gameguy::memory::Memory> memory)
         : m_register(reg)
+        , m_memory(memory)
         , m_commands()
 {
+    setupLoadCommands();
+    setupJumpCommands();
+    setupRotateShiftCommands();
 }
 
-#define GEN_LOAD_COMMAND_REG2REG(value, to, from) \
-    m_commands[value] = [this](gameguy::cpu::Register &reg) { \
-        reg.reg##to(reg.reg##from()); \
-    }
+auto Command::execute(gameguy::Byte opcode) -> void
+{
+    m_commands[opcode]();
+}
 
 auto Command::setupLoadCommands() -> void
 {
+#define GEN_LOAD_COMMAND_REG2REG(value, to, from) \
+    m_commands[value] = [this]() -> void {\
+        m_register->reg##to(m_register->reg##from()); \
+    }
+
     GEN_LOAD_COMMAND_REG2REG(0x40, B, B);
     GEN_LOAD_COMMAND_REG2REG(0x41, B, C);
     GEN_LOAD_COMMAND_REG2REG(0x42, B, D);
@@ -71,10 +83,24 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x6C, L, H);
     GEN_LOAD_COMMAND_REG2REG(0x6D, L, L);
     // TODO: 0x4E
-    GEN_LOAD_COMMAND_REG2REG(0x6F, L, A);    
+    GEN_LOAD_COMMAND_REG2REG(0x6F, L, A);
+#undef GEN_LOAD_COMMAND_REG2REG
 }
 
-#undef GEN_LOAD_COMMAND_REG2REG
+auto Command::setupJumpCommands() -> void
+{
+    m_commands[0xC3] = [this]() -> void {
+        gameguy::Word address = m_memory->readWord(m_register->regPC());
+        m_register->regPC(address);
+    };
+}
+
+auto Command::setupRotateShiftCommands() -> void
+{
+    m_commands[0x00] = [this]() -> void {
+
+    };
+}
 
 } // namespace cpu
 
