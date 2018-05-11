@@ -1,6 +1,8 @@
 #ifndef GAMEGUY_ROM_CARTRIDGE_TYPE_HPP
 #define GAMEGUY_ROM_CARTRIDGE_TYPE_HPP
 
+#include <string>
+
 namespace gameguy {
 
 namespace rom {
@@ -36,6 +38,9 @@ enum class CartridgeType
     HuC3                            = 0xFE,
     HuC1_RAM_BATTERY                = 0xFF,
 };
+
+auto stringToCartridgeType(const std::string& s) -> CartridgeType;
+auto cartridgeTypeToString(CartridgeType c) -> std::string;
 
 } // namespace rom
 
