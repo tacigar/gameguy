@@ -26,9 +26,8 @@ auto Cpu::executeInstruction() -> void
 {
     gameguy::Byte opcode = m_memory->readByte(m_register->regPC());
     std::cout << std::hex << (int)opcode << std::endl;
-    m_command->execute(opcode);
-    std::cout << (int)opcode << std::endl;
     m_register->regPC((m_register->regPC() + 1) & 0xFFFF);
+    m_command->execute(opcode);
 }
 
 } // namespace cpu

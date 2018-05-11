@@ -90,7 +90,8 @@ auto Command::setupLoadCommands() -> void
 auto Command::setupJumpCommands() -> void
 {
     m_commands[0xC3] = [this]() -> void {
-        m_register->regPC(m_memory->readWord(m_register->regPC()));
+        gameguy::Word address = m_memory->readWord(m_register->regPC());
+        m_register->regPC(address);
     };
 }
 
