@@ -18,7 +18,7 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
 auto Command::setupLoadCommands() -> void
 {
 #define GEN_LOAD_COMMAND_REG2REG(value, to, from) \
-    m_commands[value] = [this]()->void {\
+    m_commands[value] = [this]() -> void {\
         m_register->reg##to(m_register->reg##from()); \
     }
 
@@ -78,9 +78,11 @@ auto Command::setupLoadCommands() -> void
 #undef GEN_LOAD_COMMAND_REG2REG
 }
 
-auto setupJumpCommands() -> void
+auto Command::setupJumpCommands() -> void
 {
-    
+    m_commands[0x3C] = [this]() -> void {
+        m_register->regPC(m_memory->readWord(m_register->regPC()));
+    };
 }
 
 } // namespace cpu
