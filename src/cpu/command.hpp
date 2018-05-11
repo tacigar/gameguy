@@ -19,11 +19,12 @@ class Command
 
   private:
     auto setupLoadCommands() -> void;
+    auto setupJumpCommands() -> void;
 
   private:
     std::shared_ptr<gameguy::cpu::Register> m_register;
     std::unordered_map<
-        gameguy::Byte, std::function<void(gameguy::cpu::Register &)>> m_commands;
+        gameguy::Byte, std::function<void()>> m_commands;
 };
 
 } // namespace cpu
