@@ -4,6 +4,7 @@
 #include <istream>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace gameguy {
 
@@ -24,7 +25,13 @@ class Rom
         return m_header;
     }
 
+    auto rawData() -> std::vector<gameguy::Byte>
+    {
+        return m_rawData;
+    }
+
   private:
+    std::vector<gameguy::Byte> m_rawData;
     std::shared_ptr<gameguy::rom::Header> m_header;
 };
 

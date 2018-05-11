@@ -25,8 +25,10 @@ auto Rom::load(std::istream& is) -> std::shared_ptr<Rom>
         is.read((char *) &c, sizeof(char));
         rawData.push_back(c);
     }
-    return std::make_shared<Rom>(
+    std::shared_ptr<gameguy::rom::Rom> newRom = std::make_shared<Rom>(
         gameguy::rom::Header::parseData(rawData));
+    newRom->m_rawData = rawData;
+    return newRom;
 }
 
 auto Rom::loadFile(const std::string& fileName) -> std::shared_ptr<Rom>
