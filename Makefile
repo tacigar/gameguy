@@ -9,7 +9,7 @@ CXXFLAGS := -std=c++14
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJS)
-	g++ $(OBJS) -o $(PROGRAM) $(LIBS) $(CXXFLAGS)
+	g++ $(OBJS) -Wall -o $(PROGRAM) $(LIBS) $(CXXFLAGS)
 
 clean:
 	@- rm -f $(PROGRAM)
