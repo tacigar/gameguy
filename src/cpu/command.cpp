@@ -91,7 +91,9 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x6D, L, L);
     GEN_LOAD_COMMAND_AT_HL(0x6E, L);
     GEN_LOAD_COMMAND_REG2REG(0x6F, L, A);
+
 #undef GEN_LOAD_COMMAND_REG2REG
+#undef GEN_LOAD_COMMAND_AT_HL
 }
 
 auto Command::setupJumpCommands() -> void
