@@ -18,9 +18,11 @@ auto main(int argc, char **argv) -> int
     DEBUG_STDOUT(*header << std::endl);
 
     gameguy::cpu::Cpu cpu(rom->rawData());
-    cpu.executeInstruction();
-    cpu.executeInstruction();
-    cpu.executeInstruction();
+
+    int numInstructions = 10;
+    for (int i = 0; i < numInstructions; i++) {
+        cpu.executeInstruction();
+    }
     
     gameguy::Game game;
     game.initialize();
