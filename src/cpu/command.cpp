@@ -17,6 +17,7 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
     setupLoadCommands();
     setupJumpCommands();
     setupRotateShiftCommands();
+    setupInterruptCommands();
 }
 
 auto Command::execute(gameguy::Byte opcode) -> void
@@ -98,6 +99,13 @@ auto Command::setupJumpCommands() -> void
 auto Command::setupRotateShiftCommands() -> void
 {
     m_commands[0x00] = [this]() -> void {
+
+    };
+}
+
+auto Command::setupInterruptCommands() -> void
+{
+    m_commands[0xF3] = [this]() -> void {
 
     };
 }

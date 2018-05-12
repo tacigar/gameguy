@@ -30,6 +30,7 @@ class Command
     auto setupLoadCommands() -> void;
     auto setupJumpCommands() -> void;
     auto setupRotateShiftCommands() -> void;
+    auto setupInterruptCommands() -> void;
 
   private:
     std::shared_ptr<gameguy::cpu::Register> m_register;
