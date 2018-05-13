@@ -22,9 +22,8 @@ auto Memory::readWord(gameguy::Word address) -> gameguy::Word
 
 auto Memory::writeWord(gameguy::Word address, gameguy::Word w) -> void
 {
-    gameguy::Word lower = readByte(address);
-    gameguy::Word upper = readByte(address + 1) << 8;
-    m_rawData[upper + lower] = w;
+    m_rawData[address] = w & 0xFF;
+    m_rawData[address + 1] = w >> 8;
 }
 
 } // namespace memory
