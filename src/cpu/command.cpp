@@ -19,6 +19,7 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
     setupRotateShiftCommands();
     setupInterruptCommands();
     setupCallCommands();
+    setupStackCommands();
 }
 
 auto Command::execute(gameguy::Byte opcode) -> void
@@ -32,6 +33,11 @@ auto Command::setupLoadCommands() -> void
     m_commands[value] = [this]() -> void {\
         m_register->reg##to(m_register->reg##from()); \
     }
+#define GEN_LOAD_COMMAND_AT_HL(value, to) \
+    m_commands[value] = [this]() -> void {\
+        m_register->reg##to(m_memory->readByte(\
+            m_register->regHL())); \
+    }
 
     GEN_LOAD_COMMAND_REG2REG(0x40, B, B);
     GEN_LOAD_COMMAND_REG2REG(0x41, B, C);
@@ -39,7 +45,7 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x43, B, E);
     GEN_LOAD_COMMAND_REG2REG(0x44, B, H);
     GEN_LOAD_COMMAND_REG2REG(0x45, B, L);
-    // TODO: 0x46
+    GEN_LOAD_COMMAND_AT_HL(0x46, B);
     GEN_LOAD_COMMAND_REG2REG(0x46, B, A);
 
     GEN_LOAD_COMMAND_REG2REG(0x48, C, B);
@@ -48,7 +54,7 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x4B, C, E);
     GEN_LOAD_COMMAND_REG2REG(0x4C, C, H);
     GEN_LOAD_COMMAND_REG2REG(0x4D, C, L);
-    // TODO: 0x4E
+    GEN_LOAD_COMMAND_AT_HL(0x4E, C);
     GEN_LOAD_COMMAND_REG2REG(0x4F, C, A);
 
     GEN_LOAD_COMMAND_REG2REG(0x50, D, B);
@@ -57,7 +63,7 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x53, D, E);
     GEN_LOAD_COMMAND_REG2REG(0x54, D, H);
     GEN_LOAD_COMMAND_REG2REG(0x55, D, L);
-    // TODO: 0x46
+    GEN_LOAD_COMMAND_AT_HL(0x56, D);
     GEN_LOAD_COMMAND_REG2REG(0x56, D, A);
 
     GEN_LOAD_COMMAND_REG2REG(0x58, E, B);
@@ -66,7 +72,7 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x5B, E, E);
     GEN_LOAD_COMMAND_REG2REG(0x5C, E, H);
     GEN_LOAD_COMMAND_REG2REG(0x5D, E, L);
-    // TODO: 0x4E
+    GEN_LOAD_COMMAND_AT_HL(0x5E, E);
     GEN_LOAD_COMMAND_REG2REG(0x5F, E, A);
 
     GEN_LOAD_COMMAND_REG2REG(0x60, H, B);
@@ -75,7 +81,7 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x63, H, E);
     GEN_LOAD_COMMAND_REG2REG(0x64, H, H);
     GEN_LOAD_COMMAND_REG2REG(0x65, H, L);
-    // TODO: 0x46
+    GEN_LOAD_COMMAND_AT_HL(0x66, H);
     GEN_LOAD_COMMAND_REG2REG(0x66, H, A);
 
     GEN_LOAD_COMMAND_REG2REG(0x68, L, B);
@@ -84,9 +90,11 @@ auto Command::setupLoadCommands() -> void
     GEN_LOAD_COMMAND_REG2REG(0x6B, L, E);
     GEN_LOAD_COMMAND_REG2REG(0x6C, L, H);
     GEN_LOAD_COMMAND_REG2REG(0x6D, L, L);
-    // TODO: 0x4E
+    GEN_LOAD_COMMAND_AT_HL(0x6E, L);
     GEN_LOAD_COMMAND_REG2REG(0x6F, L, A);
+
 #undef GEN_LOAD_COMMAND_REG2REG
+#undef GEN_LOAD_COMMAND_AT_HL
 }
 
 auto Command::setupJumpCommands() -> void
@@ -121,6 +129,22 @@ auto Command::setupCallCommands() -> void
         gameguy::Word address = m_memory->readWord(m_register->regPC());
         m_register->regPC(address);
     };
+}
+
+auto Command::setupStackCommands() -> void
+{
+#define GEN_STACK_COMMAND(value, x, y) \
+    m_commands[value] = [this]() -> void { \
+        m_register->regSP(m_register->regSP() - 2); \
+        m_memory->writeWord(m_register->regSP(), m_register->reg##x##y()); \
+    }
+
+    GEN_STACK_COMMAND(0xC5, B, C);
+    GEN_STACK_COMMAND(0xC5, D, E);
+    GEN_STACK_COMMAND(0xC5, H, L);
+    GEN_STACK_COMMAND(0xC5, A, F);
+
+#undef GEN_STACK_COMMAND
 }
 
 } // namespace cpu

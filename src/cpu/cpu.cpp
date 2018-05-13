@@ -7,6 +7,7 @@
 #include "register.hpp"
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 
 namespace gameguy {
@@ -25,7 +26,12 @@ Cpu::Cpu(const std::vector<gameguy::Byte>& rawData)
 auto Cpu::executeInstruction() -> void
 {
     gameguy::Byte opcode = m_memory->readByte(m_register->regPC());
-    std::cout << std::hex << (int)opcode << std::endl;
+
+    DEBUG_STDOUT(
+        "OPCODE: " << std::setw(2) << std::hex << static_cast<int>(opcode) <<
+        '(' << std::setw(3) << std::dec << static_cast<int>(opcode) << "), " <<
+        "ADDRESS: " << std::setw(2) << std::hex << static_cast<int>(m_register->regPC()) <<
+        '(' << std::setw(3) << std::dec << static_cast<int>(m_register->regPC()) << ')' << std::endl);
     m_register->regPC((m_register->regPC() + 1) & 0xFFFF);
     m_command->execute(opcode);
 }
