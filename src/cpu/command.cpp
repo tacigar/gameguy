@@ -19,6 +19,7 @@ Command::Command(const std::shared_ptr<gameguy::cpu::Register> reg,
     setupRotateShiftCommands();
     setupInterruptCommands();
     setupCallCommands();
+    setupStackCommands();
 }
 
 auto Command::execute(gameguy::Byte opcode) -> void
@@ -128,6 +129,22 @@ auto Command::setupCallCommands() -> void
         gameguy::Word address = m_memory->readWord(m_register->regPC());
         m_register->regPC(address);
     };
+}
+
+auto Command::setupStackCommands() -> void
+{
+#define GEN_STACK_COMMAND(value, x, y) \
+    m_commands[value] = [this]() -> void { \
+        m_register->regSP(m_register->regSP() - 2); \
+        m_memory->writeWord(m_register->regSP(), m_register->reg##x##y()); \
+    }
+
+    GEN_STACK_COMMAND(0xC5, B, C);
+    GEN_STACK_COMMAND(0xC5, D, E);
+    GEN_STACK_COMMAND(0xC5, H, L);
+    GEN_STACK_COMMAND(0xC5, A, F);
+
+#undef GEN_STACK_COMMAND
 }
 
 } // namespace cpu

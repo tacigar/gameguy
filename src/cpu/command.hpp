@@ -32,6 +32,7 @@ class Command
     auto setupRotateShiftCommands() -> void;
     auto setupInterruptCommands() -> void;
     auto setupCallCommands() -> void;
+    auto setupStackCommands() -> void;
 
   private:
     std::shared_ptr<gameguy::cpu::Register> m_register;
