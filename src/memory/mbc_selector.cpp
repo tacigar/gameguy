@@ -6,6 +6,7 @@
 #include "mbc3.hpp"
 
 #include <memory>
+#include <stdexcept>
 #include <vector>
 
 namespace gameguy {
@@ -32,7 +33,9 @@ auto MbcSelector::select(gameguy::rom::CartridgeType cartridgeType,
         case CartridgeType::MBC3_RAM_BATTERY:
             return std::make_shared<gameguy::memory::Mbc3>(rawData);
         default:
-            return nullptr;
+            throw std::invalid_argument(
+                "Such type mbc is not defined: "
+                + cartridgeTypeToString(cartridgeType));
     }
 }
 
